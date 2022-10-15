@@ -14,16 +14,17 @@ class Keywords:
         self.array_of_keywords = []
         self.numOfKeywords = 50
         self.max_ngram_size = 3
-        self.deduplication_thresold = 0.9
+        self.deduplication_threshold = 0.9
         self.deduplication_algo = 'seqm'
 
-    def override(self,text=None,language="french", num_of_keywords=50, max_ngram_size=3, deduplication_thresold=0.9):
+    def override(self, text=None, language="french", num_of_keywords=50, max_ngram_size=3, deduplication_thresold=0.9):
         self.text = text
         self.lang = language
         self.numOfKeywords = num_of_keywords
         self.max_ngram_size = max_ngram_size
-        self.deduplication_thresold = deduplication_thresold
-        custom_kw_extractor = yake.KeywordExtractor(lan=self.lang, n=self.max_ngram_size, dedupLim=self.deduplication_thresold,
+        self.deduplication_threshold = deduplication_thresold
+        custom_kw_extractor = yake.KeywordExtractor(lan=self.lang, n=self.max_ngram_size,
+                                                    dedupLim=self.deduplication_threshold,
                                                     dedupFunc=self.deduplication_algo, windowsSize=self.windowSize,
                                                     top=self.numOfKeywords, features=None)
         self.array_of_keywords = custom_kw_extractor.extract_keywords(text)

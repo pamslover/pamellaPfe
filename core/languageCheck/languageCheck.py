@@ -10,7 +10,7 @@ class LanguageCheck:
     def override(self, text):
         self.text = text
         identifier = LanguageIdentifier.from_modelstring(model, norm_probs=True)
-        self.language = identifier.classify(self.text)
+        self.language, _ = identifier.classify(self.text)
 
         return self.language
 

@@ -1,0 +1,5 @@
+word2vec.model
+word2vec_gensim.model
+input/GoogleNews-vectors-negative300.bin
+word2vec_gensim.model.syn1neg.npy
+word2vec_gensim.model.wv.vectors.npy

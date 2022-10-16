@@ -37,6 +37,11 @@ case $params in
     start_master
     ;;
 
+  start_all)
+    start_master
+    start_all_slave
+    ;;
+
   slave)
     p=("$@")
     start_slave_number "${p[@]:1}"

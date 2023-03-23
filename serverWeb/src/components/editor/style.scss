@@ -1,0 +1,144 @@
+.mdeditor * {
+  box-sizing: border-box;
+}
+
+.mdeditor {
+  background-color: #fff;
+  position: relative;
+  height: 500px;
+  box-shadow: 0 1px 2px rgba(#000, 0.2);
+}
+.mdeditor--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.mdeditor .CodeMirror-wrap {
+  height: 100%;
+}
+
+.mdeditor__toolbar {
+  display: flex;
+  position: relative;
+  z-index: 3;
+  height: 34px;
+  box-shadow: 0 1px 2px rgba(#000, 0.2);
+
+  button {
+    height: 34px;
+    width: 34px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+  }
+  svg{
+    transform: translateY(2px);
+    fill: #1D1D1D;
+    width: 15px;
+    height: 15px;
+  }
+}
+ .mdeditor__toolbarright {
+   margin-left: auto;
+ }
+.mdeditor__editor,
+.mdeditor__preview{
+  position: absolute;
+  z-index: 2;
+  padding: 20px;
+  top: 34px;
+  bottom: 0;
+  width: 50%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.mdeditor__editor{
+  left: 0;
+}
+.mdeditor__preview{
+  right: 0;
+}
+
+// scss test
+:root {
+  --idriss: brown;
+  --tamo:black;
+
+}
+.test{
+  position: relative;
+  height: 200px;
+}
+
+// style menu
+.menu{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  //background: #0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu.active{
+
+}
+
+.menu li{
+  position: absolute;
+  left: 0;
+  list-style: none;
+  transform-origin: 100px;
+  transition: 0.5s;
+  transition-delay: calc(0.1s * var(--i));
+  transform: rotate(0deg) translateX(85px);
+
+}
+.menu.active li{
+  transform: rotate(calc(360deg / var(--nbr_li_element) * var(--i)));
+
+}
+
+.menu li button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 50%;
+  transform: rotate(calc(-360deg / var(--nbr_li_element) * var(--i)));
+  box-shadow: 0 3px 4px rgba(0,0,0,0.15);
+  color: #111;
+  transition: 0.5s;
+}
+
+.menu li button:hover{
+  background: #ff1252;
+}
+
+.toggle{
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0,0,0,0.15);
+  font-size: 2em;
+  transition: transform 1.25s;
+}
+.menu.active .toggle{
+  transform: rotate(315deg);
+}

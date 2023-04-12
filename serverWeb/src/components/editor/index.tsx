@@ -3,9 +3,13 @@ import CodeMirrorComponent from "./CodeMirrorComponent";
 import './style.scss'
 import MarkdownComponent from "./MarkdownComponent";
 import * as CodeMirror from "codemirror";
-import {Bold, Italic, FullScreen, Speech, Joy, Menu, ContactMenu} from "./buttons";
+import {Bold, Italic, FullScreen, Speech, Joy, Menu, ContactMenu, ShowFileManager} from "./buttons";
 import {ISections, SectionsGenerator} from "./libs/SectionsGenerator";
 import {debounce} from "lodash";
+import {FileManager} from 'filemanager-element'
+import 'filemanager-element/FileManager.css'
+
+FileManager.register();
 
 interface IProps {
     value: string |null
@@ -15,6 +19,7 @@ interface IState {
     content: string
     editor: CodeMirror.Editor| null
     fullscreen: boolean
+    showFileManager: boolean
 }
 interface IEditorSections {
     editor: ISections
@@ -33,7 +38,8 @@ export default class Editor extends Component<IProps, IState>{
         this.state = {
             content: props.value || '',
             editor: null,
-            fullscreen: false
+            fullscreen: false,
+            showFileManager:false
         }
     }
 
@@ -84,11 +90,19 @@ export default class Editor extends Component<IProps, IState>{
     private resetSections = () => {
         this.sections = null
     }
-    render({name}:IProps,{content, editor, fullscreen}:IState): JSX.Element {
+    render({name}:IProps,{content, editor, fullscreen, showFileManager}:IState): JSX.Element {
         let cls = 'mdeditor'
+        const filemanager = document.querySelector('file-manager')
         if (fullscreen){
             cls += ' mdeditor--fullscreen'
         }
+       if (showFileManager){
+            filemanager.removeAttribute('hidden')
+        }
+        filemanager.addEventListener('close', () =>{
+            filemanager.setAttribute('hidden', '')
+            this.toggleshowfilemanager()
+        })
         const menu1_item = []
         menu1_item.push(<Bold editor={editor}/>)
         menu1_item.push(<Italic editor={editor}/>)
@@ -111,7 +125,6 @@ export default class Editor extends Component<IProps, IState>{
                         <Italic editor={editor}/>,
                         <Speech editor={editor}/>,
                         <Joy editor={editor}/>,
-
                     ]}
                 </div>
                 <div className="mdeditor__toolbarcenter">
@@ -122,7 +135,8 @@ export default class Editor extends Component<IProps, IState>{
                 </div>
                 <div class="mdeditor__toolbarright">
                     {editor && [
-                        <FullScreen fullscreen = {fullscreen} onClick={this.togglefullscreen}/>
+                        <ShowFileManager showFileManager={showFileManager} onClick={this.toggleshowfilemanager}/>,
+                        <FullScreen fullscreen = {fullscreen} onClick={this.togglefullscreen}/>,
                     ]}
                 </div>
             </div>
@@ -143,6 +157,9 @@ export default class Editor extends Component<IProps, IState>{
     }
     togglefullscreen = () =>{
         this.setState({fullscreen: !this.state.fullscreen})
+    }
+    toggleshowfilemanager = () =>{
+        this.setState({showFileManager: !this.state.showFileManager})
     }
     onScroll = (e: UIEvent) =>{
         let sections = this.getSections()

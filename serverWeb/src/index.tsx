@@ -1,9 +1,9 @@
 import {h, render} from 'preact'
 import Editor from "./components/editor";
-import {FileManager} from 'filemanager-element'
+/*import {FileManager} from 'filemanager-element'
 import 'filemanager-element/FileManager.css'
 
-FileManager.register();
+FileManager.register();*/
 let textareas = document.querySelectorAll('textarea.mdeditor') as NodeListOf<HTMLTextAreaElement>
 textareas.forEach(function (textarea) {
     let value = textarea.value

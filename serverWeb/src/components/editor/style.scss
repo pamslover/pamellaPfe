@@ -50,6 +50,11 @@
  .mdeditor__toolbarright {
    margin-left: auto;
  }
+ .filemanager{
+   display: flex;
+   position: relative;
+   z-index: 4;
+ }
 .mdeditor__editor,
 .mdeditor__preview{
   position: absolute;

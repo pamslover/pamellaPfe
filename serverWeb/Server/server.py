@@ -6,9 +6,10 @@ import os
 import subprocess
 
 app = Flask(__name__)
+
+cache_path = '/data/AllProjectIA/Summarization/serveurWeb/dist/tmp'
 dataset_path = '/data/AllProjectIA/pamella/dataset/'
 base_name_dir = '/data/AllProjectIA/pamella/'
-cache_path = '/data/AllProjectIA/pamella/serverWeb/dist/tmp'
 count = 0
 paths = []
 
@@ -31,9 +32,9 @@ def list_files():
     print('folders')
 
     if folder is not None:
-        path = '/data/AllProjectIA/pamella/dataset/' + folder
+        path = '/data/AllProjectIA/Summarization/dataset/' + folder
     else:
-        path = '/data/AllProjectIA/pamella/dataset'
+        path = '/data/AllProjectIA/Summarization/dataset'
     response = command_ls_files(path)
     response = list(map(to_array_files, ['/'.join(path.split('/')[4:]) for path in response['data']]))
     queue = Queue()
